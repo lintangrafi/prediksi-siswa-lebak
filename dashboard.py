@@ -13,12 +13,12 @@ from sklearn.metrics import mean_absolute_percentage_error
 import os
 
 # --- 1. Konfigurasi Halaman dan Judul ---
-st.set_page_config(layout="wide", page_title="Prediksi Murid SMA Lebak")
-st.title("Dashboard Prediksi Jumlah Murid SMA di Kabupaten Lebak")
+st.set_page_config(layout="wide", page_title="Prediksi Murid SMP Lebak")
+st.title("Dashboard Prediksi Jumlah Murid SMP di Kabupaten Lebak")
 
 # --- 2. Fungsi Pemuatan Data (dengan Fitur Lag) ---
 @st.cache_data
-def load_data(file_path="data_murid_lebak_2016-2024_CLEAN.json"):
+def load_data(file_path="data_murid_smp_clean.json"):
     if not os.path.exists(file_path):
         st.error(f"ERROR: File '{file_path}' tidak ditemukan. Pastikan file berada di folder yang sama.")
         return pd.DataFrame()
@@ -29,18 +29,18 @@ def load_data(file_path="data_murid_lebak_2016-2024_CLEAN.json"):
         return pd.DataFrame()
         
     df = df.sort_values(by=['Kecamatan', 'Tahun'])
-    df['Jumlah Murid Tahun Lalu'] = df.groupby('Kecamatan')['Jumlah Murid SMA (Negeri+Swasta)'].shift(1)
+    df['Jumlah Murid Tahun Lalu'] = df.groupby('Kecamatan')['Jumlah Murid SMP (Negeri+Swasta)'].shift(1)
     return df
 
 # --- 3. Fungsi Pelatihan Model (dengan Fitur Lag) ---
 @st.cache_resource
 def train_model(df_input):
-    target_col = 'Jumlah Murid SMA (Negeri+Swasta)'
+    target_col = 'Jumlah Murid SMP (Negeri+Swasta)'
     df_clean = df_input.dropna(subset=[target_col]).copy()
     features_to_use = [
-        'Kecamatan', 'Tahun', 'Jumlah Sekolah SMA (Negeri)', 'Jumlah Sekolah SMA (Swasta)',
-        'Jumlah Sekolah SMA (Negeri+Swasta)', 'Jumlah Guru SMA (Negeri)',
-        'Jumlah Guru SMA (Swasta)', 'Jumlah Guru SMA (Negeri+Swasta)',
+        'Kecamatan', 'Tahun', 'Jumlah Sekolah SMP (Negeri)', 'Jumlah Sekolah SMP (Swasta)',
+        'Jumlah Sekolah SMP (Negeri+Swasta)', 'Jumlah Guru SMP (Negeri)',
+        'Jumlah Guru SMP (Swasta)', 'Jumlah Guru SMP (Negeri+Swasta)',
         'Jumlah Murid Tahun Lalu'
     ]
     X = df_clean[features_to_use]
@@ -79,7 +79,7 @@ if not df.empty:
         df_test = df[df['Tahun'] == 2024].copy()
         
         if not df_test.empty and 'Jumlah Murid Tahun Lalu' in df_test.columns:
-            y_test = df_test['Jumlah Murid SMA (Negeri+Swasta)']
+            y_test = df_test['Jumlah Murid SMP (Negeri+Swasta)']
             X_test = df_test[features]
             y_pred = model.predict(X_test)
             mape = mean_absolute_percentage_error(y_test, y_pred) * 100
@@ -149,8 +149,8 @@ if not df.empty:
         
         # Blok Metrik (Tidak berubah)
         try:
-            data_2024 = data_hist[data_hist['Tahun'] == 2024]['Jumlah Murid SMA (Negeri+Swasta)'].iloc[0]
-            data_2023 = data_hist[data_hist['Tahun'] == 2023]['Jumlah Murid SMA (Negeri+Swasta)'].iloc[0]
+            data_2024 = data_hist[data_hist['Tahun'] == 2024]['Jumlah Murid SMP (Negeri+Swasta)'].iloc[0]
+            data_2023 = data_hist[data_hist['Tahun'] == 2023]['Jumlah Murid SMP (Negeri+Swasta)'].iloc[0]
             pertumbuhan = ((data_2024 - data_2023) / data_2023) * 100
             col1, col2, col3 = st.columns(3)
             col1.metric(label="Total Murid (2024)", value=f"{data_2024:,.0f}")
@@ -166,7 +166,7 @@ if not df.empty:
             # --- Logika untuk menghasilkan prediksi (2025-2027) ---
             pred_list = []
             base_features_df = last_year_data[features].copy()
-            current_lag_value = last_year_data['Jumlah Murid SMA (Negeri+Swasta)'].iloc[0]
+            current_lag_value = last_year_data['Jumlah Murid SMP (Negeri+Swasta)'].iloc[0]
             
             for t in range(2025, 2028): # Prediksi 3 tahun
                 base_features_df['Tahun'] = t
@@ -178,7 +178,7 @@ if not df.empty:
             df_pred = pd.DataFrame(pred_list)
             
             # --- Logika untuk tabel pertumbuhan (YoY) ---
-            data_2024_row = pd.DataFrame([{'Tahun': 2024, 'Prediksi Murid': last_year_data['Jumlah Murid SMA (Negeri+Swasta)'].iloc[0]}])
+            data_2024_row = pd.DataFrame([{'Tahun': 2024, 'Prediksi Murid': last_year_data['Jumlah Murid SMP (Negeri+Swasta)'].iloc[0]}])
             df_pred_calc = pd.concat([data_2024_row, df_pred], ignore_index=True).set_index('Tahun')
             df_pred_calc['% Pertumbuhan (YoY)'] = df_pred_calc['Prediksi Murid'].pct_change() * 100
             df_pred_tampil = df_pred_calc.drop(2024)
@@ -213,28 +213,28 @@ if not df.empty:
 
             # --- Bagian Plot dan Tabel (Tidak Berubah) ---
             st.subheader("1. Tren Historis (2016-2024)")
-            fig_hist = px.line(data_hist, x='Tahun', y='Jumlah Murid SMA (Negeri+Swasta)', title=f"Tren Historis Murid SMA di {selected_kecamatan}", markers=True)
+            fig_hist = px.line(data_hist, x='Tahun', y='Jumlah Murid SMP (Negeri+Swasta)', title=f"Tren Historis Murid SMP di {selected_kecamatan}", markers=True)
             fig_hist.update_xaxes(type='category')
             st.plotly_chart(fig_hist, use_container_width=True)
             
             st.subheader("Ringkasan Data Historis")
-            tabel_hist = data_hist.set_index('Tahun')[['Jumlah Murid SMA (Negeri+Swasta)', 'Jumlah Guru SMA (Negeri+Swasta)', 'Jumlah Sekolah SMA (Negeri+Swasta)', 'Jumlah Murid Tahun Lalu']]
+            tabel_hist = data_hist.set_index('Tahun')[['Jumlah Murid SMP (Negeri+Swasta)', 'Jumlah Guru SMP (Negeri+Swasta)', 'Jumlah Sekolah SMP (Negeri+Swasta)', 'Jumlah Murid Tahun Lalu']]
             st.dataframe(tabel_hist, use_container_width=True, column_config={
-                "Jumlah Murid SMA (Negeri+Swasta)": st.column_config.BarChartColumn("Total Murid", width="medium"),
-                "Jumlah Guru SMA (Negeri+Swasta)": st.column_config.NumberColumn("Total Guru", format="%.0f"),
-                "Jumlah Sekolah SMA (Negeri+Swasta)": st.column_config.NumberColumn("Total Sekolah", format="%d"),
+                "Jumlah Murid SMP (Negeri+Swasta)": st.column_config.BarChartColumn("Total Murid", width="medium"),
+                "Jumlah Guru SMP (Negeri+Swasta)": st.column_config.NumberColumn("Total Guru", format="%.0f"),
+                "Jumlah Sekolah SMP (Negeri+Swasta)": st.column_config.NumberColumn("Total Sekolah", format="%d"),
                 "Jumlah Murid Tahun Lalu": st.column_config.NumberColumn("Murid Tahun Lalu", format="%.0f")
             })
             st.divider()
 
             st.subheader("2. Prediksi Tren Jangka Pendek (2025-2027)")
-            df_pred_plot = df_pred.rename(columns={'Prediksi Murid': 'Jumlah Murid SMA (Negeri+Swasta)'})
+            df_pred_plot = df_pred.rename(columns={'Prediksi Murid': 'Jumlah Murid SMP (Negeri+Swasta)'})
             df_pred_plot['Tipe'] = 'Prediksi'
-            data_hist_copy = data_hist[['Tahun', 'Jumlah Murid SMA (Negeri+Swasta)']].copy()
+            data_hist_copy = data_hist[['Tahun', 'Jumlah Murid SMP (Negeri+Swasta)']].copy()
             data_hist_copy['Tipe'] = 'Historis'
             combined_df = pd.concat([data_hist_copy, df_pred_plot], ignore_index=True)
             
-            fig_pred = px.line(combined_df, x='Tahun', y='Jumlah Murid SMA (Negeri+Swasta)', color='Tipe', markers=True, title=f"Prediksi Tren Murid SMA di {selected_kecamatan} hingga 2027")
+            fig_pred = px.line(combined_df, x='Tahun', y='Jumlah Murid SMP (Negeri+Swasta)', color='Tipe', markers=True, title=f"Prediksi Tren Murid SMP di {selected_kecamatan} hingga 2027")
             fig_pred.update_xaxes(type='category')
             st.plotly_chart(fig_pred, use_container_width=True)
             

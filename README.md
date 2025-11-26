@@ -1,13 +1,13 @@
-# Analisis dan Prediksi Jumlah Murid Sekolah Menengah Atas (SMA) di Seluruh Kecamatan Kabupaten Lebak Tahun 2016–2024 Menggunakan Metode Machine Learning
+# Analisis dan Prediksi Jumlah Murid Sekolah Menengah Pertama (SMP) di Seluruh Kecamatan Kabupaten Lebak Tahun 2016–2024 Menggunakan Metode Machine Learning
 
 ## Deskripsi Proyek
 
-Proyek ini merupakan implementasi dari penelitian yang bertujuan untuk menganalisis dan memprediksi jumlah murid Sekolah Menengah Atas (SMA) di seluruh kecamatan Kabupaten Lebak dari tahun 2016 hingga 2024 menggunakan metode machine learning. Proyek ini menggabungkan data historis dari berbagai kecamatan untuk membuat prediksi yang akurat dan membantu dalam perencanaan pendidikan di daerah tersebut.
+Proyek ini merupakan implementasi dari penelitian yang bertujuan untuk menganalisis dan memprediksi jumlah murid Sekolah Menengah Pertama (SMP) di seluruh kecamatan Kabupaten Lebak dari tahun 2016 hingga 2024 menggunakan metode machine learning. Proyek ini menggabungkan data historis dari berbagai kecamatan untuk membuat prediksi yang akurat dan membantu dalam perencanaan pendidikan di daerah tersebut.
 
 ## Tujuan Proyek
 
-- Menganalisis tren jumlah murid SMA di Kabupaten Lebak dari tahun 2016 hingga 2024
-- Memprediksi jumlah murid SMA di masa depan menggunakan model machine learning
+- Menganalisis tren jumlah murid SMP di Kabupaten Lebak dari tahun 2016 hingga 2024
+- Memprediksi jumlah murid SMP di masa depan menggunakan model machine learning
 - Memberikan informasi yang berguna untuk perencanaan pendidikan di Kabupaten Lebak
 - Menyediakan visualisasi data untuk memahami pola dan tren lebih baik
 

@@ -351,6 +351,19 @@
         "Tahun":2016
     },
     {
+        "Kecamatan":"",
+        "Jumlah Sekolah SMP (Negeri)":null,
+        "Jumlah Sekolah SMP (Swasta)":null,
+        "Jumlah Sekolah SMP (Negeri+Swasta)":null,
+        "Jumlah Guru SMP (Negeri)":null,
+        "Jumlah Guru SMP (Swasta)":null,
+        "Jumlah Guru SMP (Negeri+Swasta)":null,
+        "Jumlah Murid SMP (Negeri)":null,
+        "Jumlah Murid SMP (Swasta)":null,
+        "Jumlah Murid SMP (Negeri+Swasta)":null,
+        "Tahun":2016
+    },
+    {
         "Kecamatan":"Malingping",
         "Jumlah Sekolah SMP (Negeri)":6.0,
         "Jumlah Sekolah SMP (Swasta)":5.0,
@@ -702,6 +715,19 @@
         "Tahun":2017
     },
     {
+        "Kecamatan":"",
+        "Jumlah Sekolah SMP (Negeri)":null,
+        "Jumlah Sekolah SMP (Swasta)":null,
+        "Jumlah Sekolah SMP (Negeri+Swasta)":null,
+        "Jumlah Guru SMP (Negeri)":null,
+        "Jumlah Guru SMP (Swasta)":null,
+        "Jumlah Guru SMP (Negeri+Swasta)":null,
+        "Jumlah Murid SMP (Negeri)":null,
+        "Jumlah Murid SMP (Swasta)":null,
+        "Jumlah Murid SMP (Negeri+Swasta)":null,
+        "Tahun":2017
+    },
+    {
         "Kecamatan":"Malingping",
         "Jumlah Sekolah SMP (Negeri)":6.0,
         "Jumlah Sekolah SMP (Swasta)":5.0,
@@ -1050,6 +1076,19 @@
         "Jumlah Murid SMP (Negeri)":813.0,
         "Jumlah Murid SMP (Swasta)":null,
         "Jumlah Murid SMP (Negeri+Swasta)":813.0,
+        "Tahun":2018
+    },
+    {
+        "Kecamatan":"",
+        "Jumlah Sekolah SMP (Negeri)":null,
+        "Jumlah Sekolah SMP (Swasta)":null,
+        "Jumlah Sekolah SMP (Negeri+Swasta)":null,
+        "Jumlah Guru SMP (Negeri)":null,
+        "Jumlah Guru SMP (Swasta)":null,
+        "Jumlah Guru SMP (Negeri+Swasta)":null,
+        "Jumlah Murid SMP (Negeri)":null,
+        "Jumlah Murid SMP (Swasta)":null,
+        "Jumlah Murid SMP (Negeri+Swasta)":null,
         "Tahun":2018
     },
     {
@@ -2805,6 +2844,19 @@
         "Jumlah Murid SMP (Negeri)":813.0,
         "Jumlah Murid SMP (Swasta)":44.0,
         "Jumlah Murid SMP (Negeri+Swasta)":857.0,
+        "Tahun":2023
+    },
+    {
+        "Kecamatan":"",
+        "Jumlah Sekolah SMP (Negeri)":null,
+        "Jumlah Sekolah SMP (Swasta)":null,
+        "Jumlah Sekolah SMP (Negeri+Swasta)":null,
+        "Jumlah Guru SMP (Negeri)":null,
+        "Jumlah Guru SMP (Swasta)":null,
+        "Jumlah Guru SMP (Negeri+Swasta)":null,
+        "Jumlah Murid SMP (Negeri)":null,
+        "Jumlah Murid SMP (Swasta)":null,
+        "Jumlah Murid SMP (Negeri+Swasta)":null,
         "Tahun":2023
     },
     {

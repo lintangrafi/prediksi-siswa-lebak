@@ -11,6 +11,8 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import mean_absolute_percentage_error, r2_score
 import os
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 # --- 1. Konfigurasi Halaman ---
 st.set_page_config(layout="wide", page_title="Analisis Prediksi SMP Lebak")
@@ -75,7 +77,6 @@ def train_comparison_models(df_input, target_col):
         ('onehot', OneHotEncoder(handle_unknown='ignore'))
     ])
     
-    # --- PERBAIKAN DI SINI: Memasukkan list kolom ke ColumnTransformer ---
     preprocessor = ColumnTransformer([
         ('num', numeric_transformer, numeric_features), 
         ('cat', categorical_transformer, categorical_features)
@@ -96,6 +97,7 @@ def train_comparison_models(df_input, target_col):
     lr_pipeline.fit(X, y)
     
     return rf_pipeline, lr_pipeline, features_to_use
+
 
 # --- 4. Eksekusi Utama ---
 data_load = load_data()
